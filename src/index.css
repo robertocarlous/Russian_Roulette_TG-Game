@@ -1,7 +1,7 @@
+@import url(https://db.onlinewebfonts.com/c/03e5383d11f03c78ee031d5cc7f0b893?family=ClickClack+W00+Regular);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url(https://db.onlinewebfonts.com/c/03e5383d11f03c78ee031d5cc7f0b893?family=ClickClack+W00+Regular);
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

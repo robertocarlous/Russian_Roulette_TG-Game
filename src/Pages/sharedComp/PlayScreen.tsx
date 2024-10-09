@@ -20,6 +20,14 @@ function PlayScreen() {
         <div className='mt-[3rem] text-sm font-semibold'>
             <p>Click spin after selecting a number pool</p>
         </div>
+       <div className="flex justify-center mt-[2rem] mx-auto">
+       <div className="relative w-56 h-56">
+        <div className="absolute inset-0 border-4 border-red-600 rounded-full"></div>
+        <div className='absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-12 h-12 bg-white rounded-full border-2 border-blue-700'>
+        <p className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue-950 font-bold'>SPIN</p>
+        </div>
+        </div>
+       </div>
         </div>
     </Template>
   )
