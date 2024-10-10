@@ -6,6 +6,22 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+	 rotate: {
+       '-180': '-180deg',
+        '-90': '-90deg',
+       '-45': '-45deg',
+        '0': '0',
+        '45': '45deg',
+        '90': '90deg',
+		'125': '125deg',
+		'130': '130deg',
+       '135': '135deg',
+        '180': '180deg',
+		'225': '225deg',
+       '270': '270deg',
+	   '300': '300deg',
+	    '315': '315deg',
+      },
   	extend: {
   		borderRadius: {
   			lg: 'var(--radius)',
