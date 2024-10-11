@@ -9,6 +9,7 @@ import PlayScreen from './Pages/sharedComp/PlayScreen'
 import Wallet from './Pages/Wallet'
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import { initializeWebApp } from './Authenticator'
+import { tonConnectConfig } from './config'
 const HomeWrapper = () => {
   const navigate = useNavigate();
 
@@ -26,9 +27,25 @@ if (!userData) {
 
   return <Home />;
 };
+
+// const manifestConfiguration = {
+//   manifestUrl: '/tonconnect-manifest.json', // Note: Use relative path
+//   connectButtonOptions: { // Optional: Customize the connect button
+//     style: {
+//       borderRadius: '10px',
+//     },
+//   },
+//   walletsListConfiguration: { // Optional: Configure wallets list
+//     includeWallets: [
+//       { name: 'Tonkeeper', id: 'tonkeeper' } as unknown as UIWallet,
+//       { name: 'OpenMask', id: 'openmask' } as unknown as UIWallet,
+//       { name: 'MyTonWallet', id: 'mytonwallet' } as unknown as UIWallet,
+//     ],
+//   },
+// };
 function App() {
   return (
-    <TonConnectUIProvider manifestUrl="https://russian-roullette-4taj.vercel.app/tonconnect-manifest.json">
+    <TonConnectUIProvider manifestUrl={tonConnectConfig.manifestUrl}>
     <Router>
       <div>
         <Routes>
