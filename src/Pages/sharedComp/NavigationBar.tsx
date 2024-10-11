@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 const NavigationBar = () => {
   const [active,setActive] = useState("Home")
-  
+  console.log(active)
   const handleClick = (tab:string) => {
     setActive(tab);
   }
