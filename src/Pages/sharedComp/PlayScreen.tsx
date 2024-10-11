@@ -4,6 +4,8 @@ import RRLOGO2 from "../../assets/RR2.png"
 import picker from "../../assets/picker.png"
 import {motion} from 'framer-motion'
 import whiteMarker from "../../assets/whiteMarker.png"
+import { initializeWebApp } from '@/Authenticator'
+import WelcomeComponent from './Welcome'
 
 function PlayScreen() {
     const [isSpinning, setIsSpinning] = useState(false)
@@ -62,10 +64,16 @@ function PlayScreen() {
       {picker:picker, title:"player 6"},
     ];
     const customEasing = [0.2, 0, 0.2, 1]
+    const userData = initializeWebApp();
+    const data =  userData?.firstName
+  
   return (
     <Template>
     <div className='flex-none h-[20%] items-start justify-start text-white relative flex flex-col  px-3'>
+    <div>
+    <WelcomeComponent data={data}/>
     <img src={RRLOGO2} alt="logo" className="flex  justify-end items-end h-14 w-14 absolute top-4 right-3"/>
+    </div>
         <p className='flex-1 mt-[5rem] font-bold text-xl'>
          <span  className='text-red-600'> WIN  </span> 
          or LOSE
