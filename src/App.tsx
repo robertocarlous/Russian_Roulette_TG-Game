@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import './App.css'
 import Home from './Pages/Home'
@@ -7,23 +7,36 @@ import GameScreen from './Pages/sharedComp/GameScreen'
 import NavigationBar from './Pages/sharedComp/NavigationBar'
 import PlayScreen from './Pages/sharedComp/PlayScreen'
 import Wallet from './Pages/Wallet'
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
-import { initializeWebApp } from './Authenticator'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+const SESSION_KEY = 'app_session';
+
 const HomeWrapper = () => {
-  const navigate = useNavigate();
+  // Initialize state with session check
+  const [isNewSession, setIsNewSession] = useState(() => {
+    const session = sessionStorage.getItem(SESSION_KEY);
+    return !session;
+  });
 
   useEffect(() => {
-    const userData = initializeWebApp();
-if (!userData) {
-  console.error('Failed to initialize Telegram WebApp');
-}
-    const timer = setTimeout(() => {
-      navigate('/game-screen');
-    }, 3000);
+    if (isNewSession) {
+      // Set session flag
+      sessionStorage.setItem(SESSION_KEY, 'true');
+      
+      const timer = setTimeout(() => {
+        setIsNewSession(false);
+      }, 3000);
 
-    return () => clearTimeout(timer);
-  }, [navigate]);
+      return () => clearTimeout(timer);
+    }
+  }, [isNewSession]);
 
+  // For existing sessions, show GameScreen
+  if (!isNewSession) {
+    return <GameScreen />;
+  }
+
+  // For new sessions, show splash/home
   return <Home />;
 };
 
