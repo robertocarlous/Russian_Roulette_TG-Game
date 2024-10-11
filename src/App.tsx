@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { TonConnectUIProvider } from '@tonconnect/ui-react'
+
 import './App.css'
 import Home from './Pages/Home'
 import Leaderboard from './Pages/LeaderBoard'
@@ -9,7 +9,6 @@ import PlayScreen from './Pages/sharedComp/PlayScreen'
 import Wallet from './Pages/Wallet'
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import { initializeWebApp } from './Authenticator'
-import { tonConnectConfig } from './config'
 const HomeWrapper = () => {
   const navigate = useNavigate();
 
@@ -45,7 +44,7 @@ if (!userData) {
 // };
 function App() {
   return (
-    <TonConnectUIProvider manifestUrl={tonConnectConfig.manifestUrl}>
+   <>
     <Router>
       <div>
         <Routes>
@@ -58,7 +57,7 @@ function App() {
         <NavigationBar/>
       </div>
     </Router>
-    </TonConnectUIProvider>
+   </>
   )
 }
 
