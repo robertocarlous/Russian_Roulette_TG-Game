@@ -1,4 +1,3 @@
-import React from 'react'
 import Template from './RoulletteTemplate'
 import RRLOGO2 from "../../assets/RR2.png"
 import RRLogoSmall from "../../assets/RR.png"
