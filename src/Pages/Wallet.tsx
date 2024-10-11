@@ -1,4 +1,3 @@
-import React from 'react'
 import Template from './sharedComp/RoulletteTemplate'
 import { Button } from '@/components/ui/button'
 import RRLOGO2 from "../assets/RR2.png"

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import  { useRef, useState } from 'react'
 import Template from './RoulletteTemplate'
 import RRLOGO2 from "../../assets/RR2.png"
 import picker from "../../assets/picker.png"
@@ -12,24 +12,24 @@ function PlayScreen() {
     const totalRotationRef = useRef(90)
 
     const generateSpinParameters = () => {
-        // Random number of complete rotations (5-10 spins)
-        const spins = 5 + Math.floor(Math.random() * 5)
-        
-        // Random additional angle (0-359 degrees)
-        const additionalAngle = Math.floor(Math.random() * 360)
-        
-        // Calculate total rotation from current position
-        const newRotation = totalRotationRef.current + (spins * 360) + additionalAngle
-        
-        // Random duration between 4 and 6 seconds
-        const duration = 4 + Math.random() * 2
-        
-        return {
-            targetRotation: newRotation,
-            duration: duration,
-            spins: spins
-        }
-    }
+      // Random number of complete rotations (5-10 spins)
+      const spins = 5 + Math.floor(Math.random() * 5)
+      
+      // Random additional angle (0-359 degrees)
+      const additionalAngle = Math.floor(Math.random() * 360)
+      
+      // Calculate total rotation from current position
+      const newRotation = totalRotationRef.current + (spins * 360) + additionalAngle
+      
+      // Random duration between 4 and 6 seconds
+      const duration = 4 + Math.random() * 2
+      
+      return {
+          targetRotation: newRotation,
+          duration: duration,
+          spins: spins
+      }
+  }
 
     const handleSpinning = () => {
         if (!isSpinning) {
