@@ -16,9 +16,11 @@ function Wallet() {
 
             {
               rawAddress ? (
-                <div className='mt-6 text-center flex-wrap text-white'>
-                  <p>Your TON address is: {rawAddress}</p>
-                  <p>Your user-friendly address is: {userFriendlyAddress}</p>
+                <div className='mt-6 text-center flex-wrap text-white text-sm'>
+                  <p>Your TON address is:
+                  {rawAddress.slice(0, 14) + '...'}
+                  </p>
+                  <p>Your user address is: {userFriendlyAddress.slice(0, 14) + '...'}  </p>
                 </div>
               )
               : ( <TonConnectButton className='rounded-[2rem] w-fit px-[2rem]  mx-auto'/>  )
