@@ -1,0 +1,12 @@
+{
+    "name": "Russian Roulette",
+    "description": "A decentralized Russian Roulette game",
+    "url": "https://russian-roullette-4taj.vercel.app",
+    "icons": [
+      {
+        "src": "https://russian-roullette-4taj.vercel.app/icon.png",
+        "sizes": "192x192"
+      }
+    ]
+  }
+  

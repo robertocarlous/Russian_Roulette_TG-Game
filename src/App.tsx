@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { TonConnectUIProvider } from '@tonconnect/ui-react'
 import './App.css'
 import Home from './Pages/Home'
 import Leaderboard from './Pages/LeaderBoard'
@@ -27,7 +28,7 @@ if (!userData) {
 };
 function App() {
   return (
-    <>
+    <TonConnectUIProvider manifestUrl="https://russian-roullette-4taj.vercel.app/tonconnect-manifest.json">
     <Router>
       <div>
         <Routes>
@@ -40,7 +41,7 @@ function App() {
         <NavigationBar/>
       </div>
     </Router>
-    </>
+    </TonConnectUIProvider>
   )
 }
 
