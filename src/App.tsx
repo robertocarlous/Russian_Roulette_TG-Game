@@ -14,6 +14,7 @@ const HomeWrapper = () => {
 
   useEffect(() => {
     const userData = initializeWebApp();
+   const data =  userData?.firstName
 if (!userData) {
   console.error('Failed to initialize Telegram WebApp');
 }
