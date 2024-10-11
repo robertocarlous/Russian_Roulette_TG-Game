@@ -16,7 +16,7 @@ function Wallet() {
 
             {
               rawAddress ? (
-                <div className='mt-6 text-center'>
+                <div className='mt-6 text-center flex-wrap text-white'>
                   <p>Your TON address is: {rawAddress}</p>
                   <p>Your user-friendly address is: {userFriendlyAddress}</p>
                 </div>
