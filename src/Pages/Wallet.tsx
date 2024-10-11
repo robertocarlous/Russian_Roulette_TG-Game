@@ -34,8 +34,7 @@ function Wallet() {
             </h2>
             <p className='text-white text-start mt-4 mx-auto w-[90%]'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolor corrupti earum s
-                oluta officia libero fuga aperiam fugit recusandae.
-                 Quaerat eum non quod nisi rerum, error iste voluptatibus illo optio.
+            
             </p>
             <div className='h-[30%] flex justify-center items-center '>
                 <Button className=' rounded-[2rem] bg-white text-[#191F57]'>
