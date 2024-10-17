@@ -10,7 +10,7 @@ import { userAuth } from '@/apis/userAuth';
 
 function GameScreen() {
     const [userData, setUserData] = useState<UserData | null>(null);
-
+    const [istrue, setIsTrue] = useState(false) 
     useEffect(() => {
       // Initialize the WebApp and set the user data
       const user = initializeWebApp();
@@ -29,6 +29,7 @@ function GameScreen() {
 
           })
           .then(response => {
+            setIsTrue(true)
             console.log("User authenticated successfully:", response.data);
           })
           .catch(error => {
@@ -53,7 +54,7 @@ function GameScreen() {
             <img src={RRLOGO2} alt="logo" className="flex  justify-end items-end h-14 w-14 absolute top-4 right-3"/>
             </div>
             <h2 className='mt-[5rem] font-bold text-xl'>
-                Available Games
+                Available Games  {istrue === false ? 'false' : 'true'}
             </h2>
             <p className="text-sm flex-1">
                 Click and Join to <span className="text-red-600 font-bold">WIN BIG !!!</span>
