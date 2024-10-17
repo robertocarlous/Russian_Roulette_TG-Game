@@ -1,4 +1,15 @@
 // telegram-webapp.d.ts
+
+export interface UserData {
+  id: number;
+  firstName: string;
+  lastName?: string;
+  username?: string;
+  languageCode?: string;
+  photoUrl?: string; 
+  initData: string;
+  hash: string;
+}
 declare global {
   interface Window {
     Telegram: {
@@ -44,16 +55,6 @@ const tg = window.Telegram.WebApp;
 
 // Initialize the WebApp
 export function initializeWebApp() {
-  interface UserData {
-  id: number;
-  firstName: string;
-  lastName?: string;
-  username?: string;
-  languageCode?: string;
-  photoUrl?: string; 
-  initData: string;
-  hash: string;
-}
    try {
     const user = tg.initDataUnsafe.user;
     console.log(user)

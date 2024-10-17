@@ -2,23 +2,33 @@ import Template from './RoulletteTemplate'
 import RRLOGO2 from "../../assets/RR2.png"
 import RRLogoSmall from "../../assets/RR.png"
 import { Card, CardHeader } from '@/components/ui/card'
-import { initializeWebApp } from '@/Authenticator';
+import { initializeWebApp, UserData } from '@/Authenticator';
 import WelcomeComponent from './Welcome';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { userAuth } from '@/apis/userAuth';
+
+
 function GameScreen() {
-    const userData = initializeWebApp();
-    const data =  userData?.firstName
-    useEffect(()=>{
+    const [userData, setUserData] = useState<UserData | null>(null);
+
+    useEffect(() => {
+      // Initialize the WebApp and set the user data
+      const user = initializeWebApp();
+      setUserData(user);
+    }, []);
+  
+    useEffect(() => {
+      if (userData) {
         userAuth({
-            id:userData?.id,
-            first_name:userData?.firstName,
-            last_name:userData?.lastName,
-            photo_url:userData?.photoUrl,
-            auth_data: new Date(),
-            hash:userData?.hash
-        })
-    },[userData?.firstName, userData?.hash, userData?.id, userData?.lastName, userData?.photoUrl])
+          id: userData.id,
+          first_name: userData.firstName,
+          last_name: userData.lastName,
+          photo_url: userData.photoUrl,
+          auth_data: new Date(),  // or use userData.auth_date if relevant
+          hash: userData.hash
+        });
+      }
+    }, [userData]);
     const stakeAmount = [
         { value: 1, label: '1BRE' },
         { value: 2, label: '0.1BRE' },
@@ -32,7 +42,7 @@ function GameScreen() {
     <Template>
         <div className='flex-none h-[98%] items-start justify-start text-white relative flex flex-col my-auto px-3'>
             <div>
-            <WelcomeComponent data={data}/>
+            <WelcomeComponent data={userData?.firstName}/>
             <img src={RRLOGO2} alt="logo" className="flex  justify-end items-end h-14 w-14 absolute top-4 right-3"/>
             </div>
             <h2 className='mt-[5rem] font-bold text-xl'>
