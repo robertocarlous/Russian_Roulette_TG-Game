@@ -4,9 +4,21 @@ import RRLogoSmall from "../../assets/RR.png"
 import { Card, CardHeader } from '@/components/ui/card'
 import { initializeWebApp } from '@/Authenticator';
 import WelcomeComponent from './Welcome';
+import { useEffect } from 'react';
+import { userAuth } from '@/apis/userAuth';
 function GameScreen() {
     const userData = initializeWebApp();
-  const data =  userData?.firstName
+    const data =  userData?.firstName
+    useEffect(()=>{
+        userAuth({
+            id:userData?.id,
+            first_name:userData?.firstName,
+            last_name:userData?.lastName,
+            photo_url:userData?.photoUrl,
+            auth_data: new Date(),
+            hash:userData?.hash
+        })
+    },[userData?.firstName, userData?.hash, userData?.id, userData?.lastName, userData?.photoUrl])
     const stakeAmount = [
         { value: 1, label: '1BRE' },
         { value: 2, label: '0.1BRE' },

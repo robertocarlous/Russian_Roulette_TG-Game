@@ -11,6 +11,7 @@ declare global {
             first_name: string;
             last_name?: string;
             username?: string;
+            photoUrl?: string; 
             language_code?: string;
             is_premium?: boolean;
           };
@@ -49,6 +50,7 @@ export function initializeWebApp() {
   lastName?: string;
   username?: string;
   languageCode?: string;
+  photoUrl?: string; 
   initData: string;
   hash: string;
 }
@@ -66,6 +68,7 @@ export function initializeWebApp() {
       lastName: user.last_name,
       username: user.username,
       languageCode: user.language_code,
+      photoUrl: user.photoUrl,
       initData: tg.initData,
       hash: tg.initDataUnsafe.hash
     };
@@ -77,5 +80,6 @@ export function initializeWebApp() {
   }
 
 }
+
 
 

@@ -59,9 +59,6 @@ function PlayScreen() {
       {picker:picker, title:"player 1"},
       {picker:picker, title:"player 2"},
       {picker:picker, title:"player 3"},
-      {picker:picker, title:"player 4"},
-      {picker:picker, title:"player 5"},
-      {picker:picker, title:"player 6"},
     ];
     const customEasing = [0.2, 0, 0.2, 1]
     const userData = initializeWebApp();
@@ -89,7 +86,7 @@ function PlayScreen() {
         </div>
        <div className="flex justify-center mt-[2rem] mx-auto">
       
-      <div className='relative mx-auto items-center  w-64 h-64'>
+      <div className='relative mx-auto items-center  w-36 h-36 mt-4'>
       <div className='absolute top-0 left-1/2 -translate-x-1/2 z-10 w-8 h-8 marker'>
         <img src={whiteMarker} alt="" />
       </div>
@@ -102,11 +99,10 @@ function PlayScreen() {
           ease: customEasing,
           type: "tween"
       }}
-      initial={false}
-       >
+      initial={false} >
         <div className="absolute inset-0 border-4 border-red-600 rounded-full">
         </div>
-        <div className='relative -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-14 h-16 bg-white rounded-full border-2 border-blue-700 '>
+        <div className='relative -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-12 h-12 bg-white rounded-full border-2 border-blue-700 '>
         {pickers.map((picker, index) => {
         const angle = (index * (360 / pickers.length) - 90) * (Math.PI / 180); // Start from top (90 degrees)
         const radius = 100; // Adjust this value to change the circle size
@@ -124,7 +120,7 @@ function PlayScreen() {
             }}
           >
          <div className='relative'>
-         <img src={picker.picker} alt='picker' className={`  ${index == 1 ? ' transform rotate-45 mb-[-3px] ' : index == 2 ? ' rotate-125' :  index == 3 ? ' rotate-180' : index == 4 ? ' rotate-225': index == 5 ? 'rotate-300' : ''}`}  />
+         <img src={picker.picker} alt='picker' className={`  ${ index == 0  ? 'rotate-10' :   index == 1 ? ' transform rotate-125 mb-[-3px] ' : index == 2 ? ' rotate-225' :  index == 3 ? ' rotate-180' : ''}`}  />
           <p className={` text-[0.75rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold  ${ index == 0 ||index == 5    ? '-mt-1 -m-1' :  'mt-[0.3rem]' }`}>
           {picker.title}
   
@@ -134,7 +130,7 @@ function PlayScreen() {
         );
       })}
         </div>
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 text-blue-950 font-bold   flex items-center justify-center bg-white rounded-full border-2 border-blue-700'>
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 text-blue-950 font-bold   flex items-center justify-center bg-white rounded-full border-2 border-blue-700'>
         <button onClick={handleSpinning}>
         <p >SPIN</p>
         </button>

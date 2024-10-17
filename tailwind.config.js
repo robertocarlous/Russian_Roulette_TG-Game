@@ -11,6 +11,7 @@ export default {
         '-90': '-90deg',
        '-45': '-45deg',
         '0': '0',
+		'10': '10deg',
         '45': '45deg',
         '90': '90deg',
 		'125': '125deg',
@@ -21,6 +22,7 @@ export default {
        '270': '270deg',
 	   '300': '300deg',
 	    '315': '315deg',
+		'345': '345deg'
       },
   	extend: {
   		borderRadius: {
