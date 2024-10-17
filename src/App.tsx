@@ -9,10 +9,14 @@ import PlayScreen from './Pages/sharedComp/PlayScreen'
 import Wallet from './Pages/Wallet'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+
+
+
+
+
 const SESSION_KEY = 'app_session';
 
 const HomeWrapper = () => {
-  // Initialize state with session check
   const [isNewSession, setIsNewSession] = useState(() => {
     const session = sessionStorage.getItem(SESSION_KEY);
     return !session;
@@ -36,25 +40,9 @@ const HomeWrapper = () => {
     return <GameScreen />;
   }
 
-  // For new sessions, show splash/home
+  // For new sessions, show home
   return <Home />;
 };
-
-// const manifestConfiguration = {
-//   manifestUrl: '/tonconnect-manifest.json', // Note: Use relative path
-//   connectButtonOptions: { // Optional: Customize the connect button
-//     style: {
-//       borderRadius: '10px',
-//     },
-//   },
-//   walletsListConfiguration: { // Optional: Configure wallets list
-//     includeWallets: [
-//       { name: 'Tonkeeper', id: 'tonkeeper' } as unknown as UIWallet,
-//       { name: 'OpenMask', id: 'openmask' } as unknown as UIWallet,
-//       { name: 'MyTonWallet', id: 'mytonwallet' } as unknown as UIWallet,
-//     ],
-//   },
-// };
 function App() {
   return (
    <>

@@ -25,7 +25,7 @@ function Wallet() {
               )
               : ( <TonConnectButton className='rounded-[2rem] w-fit px-[2rem]  mx-auto'/>  )
 
-            }
+            }    
             
 
 
