@@ -20,13 +20,20 @@ function GameScreen() {
     useEffect(() => {
       if (userData) {
         userAuth({
-          id: userData.id,
-          first_name: userData.firstName,
-          last_name: userData.lastName,
-          photo_url: userData.photoUrl,
-          auth_data: new Date(),  // or use userData.auth_date if relevant
-          hash: userData.hash
-        });
+            id: userData.id,
+            first_name: userData.firstName,
+            last_name: userData.lastName,
+            photo_url: userData.photoUrl,
+            auth_date: new Date(), // or use userData.auth_date if available
+            hash: userData.hash
+
+          })
+          .then(response => {
+            console.log("User authenticated successfully:", response.data);
+          })
+          .catch(error => {
+            console.error("Authentication failed:", error);
+          });
       }
     }, [userData]);
     const stakeAmount = [
