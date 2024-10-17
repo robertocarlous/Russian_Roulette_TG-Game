@@ -8,6 +8,6 @@ export const userAuth = async (data: any) => {
     return response;
   } catch (error: any) {
     console.error("Error in userAuth:", error); // Log the error for debugging
-    throw new Error(error.response ? error.response.data : error.message); // More informative error message
+    // throw new Error(error.response ? error.response.data : error.message); // More informative error message
   }
 };

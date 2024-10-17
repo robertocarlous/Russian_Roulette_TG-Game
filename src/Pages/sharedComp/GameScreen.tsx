@@ -29,7 +29,7 @@ function GameScreen() {
           })
           .then(response => {
            
-            console.log("User authenticated successfully:", response.data);
+            console.log("User authenticated successfully:", response?.data);
           })
           .catch(error => {
             console.error("Authentication failed:", error);
