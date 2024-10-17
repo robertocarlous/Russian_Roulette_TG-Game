@@ -34,6 +34,7 @@ function GameScreen() {
           })
           .catch(error => {
             console.error("Authentication failed:", error);
+            
           });
       }
     }, [userData]);
