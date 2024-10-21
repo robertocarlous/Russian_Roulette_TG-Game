@@ -13,7 +13,7 @@ function PlayScreen() {
     // Use a ref to track the actual rotation including all previous spins
     const totalRotationRef = useRef(90)
 
-    const generateSpinParameters = () => {
+    const generateSpinParameters = () =>                                 {
       // Random number of complete rotations (5-10 spins)
       const spins = 5 + Math.floor(Math.random() * 5)
       

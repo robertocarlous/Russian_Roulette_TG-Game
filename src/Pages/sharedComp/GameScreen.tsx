@@ -23,6 +23,7 @@ function GameScreen() {
             first_name: userData?.firstName,
             last_name: userData?.lastName,
             photo_url: userData?.photoUrl,
+            username: userData?.username,
             auth_date: new Date(), // or use userData.auth_date if available
             hash: userData?.hash
 
