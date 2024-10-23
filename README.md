@@ -37,8 +37,10 @@ This project is a Telegram mini-application where users participate in a staking
 - Aptos testnet wallet
 - Telegram account
 
-## contract was deployed to Base
+## contract was deployed to Aptos Testnet
 Here is the contract address 
+
+d7e864c4e6350c95955ad62eaacfc53f19eaa1ee2c197a7f9b36284c363889a8
 
 
 ### Steps to Contribute
