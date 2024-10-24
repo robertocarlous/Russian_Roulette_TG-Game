@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { Wheel } from 'react-custom-roulette'
 import Template from './RoulletteTemplate'
 import RRLOGO2 from "../../assets/RR2.png"
-import whiteMarker from "../../assets/whiteMarker.png"
 import WelcomeComponent from './Welcome'
 import { Toaster, toast } from 'sonner'
 import {soundManager} from "../../lib/soundManager.ts"
