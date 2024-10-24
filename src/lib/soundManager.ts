@@ -1,5 +1,6 @@
 // utils/soundManager.ts
 import soundplay from "../../src/assets/mixkit-epic-orchestra-transition-2290 (1).wav"
+import soundwin from "../../src/assets/2013-preview.mp3"
 interface SoundCollection {
     [key: string]: HTMLAudioElement;
 }
@@ -12,7 +13,7 @@ class SoundManager {
     constructor() {
         this.sounds = {
             spin: new Audio(soundplay),
-            win: new Audio("https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3")
+            win: new Audio(soundwin)
         };
         
         // Preload all sounds

@@ -118,10 +118,10 @@ function PlayScreen() {
               <div className='w-full flex justify-center items-center mt-8 mb-8'>
                   <div className='relative w-full max-w-[300px] aspect-square'>
                       {/* Marker */}
-                      <div className='absolute top-0 left-1/2 -translate-x-1/2 z-10 w-8 h-8'>
+                      {/* <div className='absolute top-0 left-1/2 -translate-x-1/2 z-10 w-8 h-8'>
                           <img src={whiteMarker} alt="" className="marker"/>
                       </div>
-                      
+                       */}
                       {/* Wheel */}
                       <div className='w-full h-full'>
                           <Wheel
