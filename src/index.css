@@ -113,3 +113,13 @@ h1 {
 }
 
 
+
+.wheel-container {
+  touch-action: none; /* Prevents unwanted touch behaviors on mobile */
+}
+
+@media (min-width: 1024px) {
+  .wheel-container {
+      max-width: 400px; /* Larger wheel on desktop if desired */
+  }
+}

@@ -1,147 +1,161 @@
-import  { useRef, useState } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, useEffect } from 'react'
+import { Wheel } from 'react-custom-roulette'
 import Template from './RoulletteTemplate'
 import RRLOGO2 from "../../assets/RR2.png"
-import picker from "../../assets/picker.png"
-import {motion} from 'framer-motion'
 import whiteMarker from "../../assets/whiteMarker.png"
-import { initializeWebApp } from '@/Authenticator'
 import WelcomeComponent from './Welcome'
+import { Toaster, toast } from 'sonner'
+import {soundManager} from "../../lib/soundManager.ts"
+
+// You can download these sounds and save them in your assets folder
 
 function PlayScreen() {
-    const [isSpinning, setIsSpinning] = useState(false)
-    const [currentRotation, setCurrentRotation] = useState(90)
-    // Use a ref to track the actual rotation including all previous spins
-    const totalRotationRef = useRef(90)
+    const [mustSpin, setMustSpin] = useState(false)
+    const [prizeNumber, setPrizeNumber] = useState(0)
+    const latestWin = 122 
+    
+    const spinSound = new Audio("https://assets.mixkit.co/active_storage/sfx/146/146-preview.mp3")
+    const winSound = new Audio("https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3")
 
-    const generateSpinParameters = () =>                                 {
-      // Random number of complete rotations (5-10 spins)
-      const spins = 5 + Math.floor(Math.random() * 5)
-      
-      // Random additional angle (0-359 degrees)
-      const additionalAngle = Math.floor(Math.random() * 360)
-      
-      // Calculate total rotation from current position
-      const newRotation = totalRotationRef.current + (spins * 360) + additionalAngle
-      
-      // Random duration between 4 and 6 seconds
-      const duration = 4 + Math.random() * 2
-      
-      return {
-          targetRotation: newRotation,
-          duration: duration,
-          spins: spins
+    // Preload sounds
+    useEffect(() => {
+        spinSound.load()
+        winSound.load()
+    }, [])
+
+    const data = [
+      { option: 'Player one' },
+      { option: 'Player two' },
+      { option: 'Player three' },
+    ]
+
+    const handleSpinClick = () => {
+      if (!mustSpin) {
+        const newPrizeNumber = Math.floor(Math.random() * data.length)
+        setPrizeNumber(newPrizeNumber)
+        setMustSpin(true)
+        soundManager.play('spin')
       }
-  }
-
-    const handleSpinning = () => {
-        if (!isSpinning) {
-            const newRotationData = generateSpinParameters()
-            setIsSpinning(true)
-            
-            // Update the current rotation
-            setCurrentRotation(newRotationData.targetRotation)
-            // Store the new total rotation
-            totalRotationRef.current = newRotationData.targetRotation
-
-            setTimeout(() => {
-                setIsSpinning(false)
-                // Calculate the final position (0-359 degrees)
-                const finalPosition = newRotationData.targetRotation % 360
-                const segment = Math.floor(finalPosition / (360 / pickers.length))
-                console.log(`Landed on segment: ${pickers[segment].title}`)
-            }, newRotationData.duration * 1000)
-        }
     }
 
-  // const pickers =Array(6).fill(null)
-    const latestWin = 122 
-    const pickers  = [
-      {picker:picker, title:"player 1"},
-      {picker:picker, title:"player 2"},
-      {picker:picker, title:"player 3"},
-    ];
-    const customEasing = [0.2, 0, 0.2, 1]
-    const userData = initializeWebApp();
-    const data =  userData?.firstName
-  
-  return (
-    <Template>
-    <div className='flex-none h-[20%] items-start justify-start text-white relative flex flex-col  px-3'>
-    <div>
-    <WelcomeComponent data={data}/>
-    <img src={RRLOGO2} alt="logo" className="flex  justify-end items-end h-14 w-14 absolute top-4 right-3"/>
-    </div>
-        <p className='flex-1 mt-[5rem] font-bold text-xl'>
-         <span  className='text-red-600'> WIN  </span> 
-         or LOSE
-        </p>
-        <p className=' text-xs mt-2'>
-        Select a number pool and stand a chance to <span className='text-red-600 '>WIN BIG !!!</span>
-        </p>
-        <p className='flex-1 '>
-        0x***cb0u0d.. Just won <span className='text-red-600 font-bold'>{latestWin} TON</span>
-        </p>
-        <div className='mt-[3rem] text-sm font-semibold'>
-            <p>Click spin after selecting a number pool</p>
-        </div>
-       <div className="flex justify-center mt-[2rem] mx-auto">
+    const handleStopSpinning = () => {
+      setMustSpin(false)
+      const winner = data[prizeNumber].option
       
-      <div className='relative mx-auto items-center  w-36 h-36 mt-4'>
-      <div className='absolute top-0 left-1/2 -translate-x-1/2 z-10 w-8 h-8 marker'>
-        <img src={whiteMarker} alt="" />
-      </div>
-      <motion.div className="relative w-full h-full  "
-        animate={{
-          rotate: currentRotation
-      }}
-      transition={{
-          duration: isSpinning ? 4 + Math.random() * 2 : 0,
-          ease: customEasing,
-          type: "tween"
-      }}
-      initial={false} >
-        <div className="absolute inset-0 border-4 border-red-600 rounded-full">
+      soundManager.stop('spin')
+      soundManager.play('win')
+      toast.custom((t: any) => (
+        <div className={`${
+          t.visible ? 'animate-enter' : 'animate-leave'
+        } max-w-md w-full bg-[#1D1B4D] shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}>
+          <div className="flex-1 w-0 p-4">
+            <div className="flex items-start">
+              <div className="ml-3 flex-1">
+                <p className="text-sm font-medium text-white">
+                  Winner Announcement!
+                </p>
+                <p className="mt-1 text-sm text-gray-300">
+                  {winner} has won the spin!
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="flex border-l border-gray-700">
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none"
+            >
+              Close
+            </button>
+          </div>
         </div>
-        <div className='relative -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-12 h-12 bg-white rounded-full border-2 border-blue-700 '>
-        {pickers.map((picker, index) => {
-        const angle = (index * (360 / pickers.length) - 90) * (Math.PI / 180); // Start from top (90 degrees)
-        const radius = 100; // Adjust this value to change the circle size
-        const x = Math.cos(angle) * radius + 50; // 50 is to center (50%)
-        const y = Math.sin(angle) * radius + 50;
-        
-        return (
-          <div
-            key={index}
-            className={`absolute  flex items-center justify-center w-16 h-16 text-sm -z-10    text-white  rounded-full`}
-            style={{
-              left: `${x}%`,
-              top: `${y}%`,
-              transform: 'translate(-50%, -50%)',
-            }}
-          >
-         <div className='relative'>
-         <img src={picker.picker} alt='picker' className={`  ${ index == 0  ? 'rotate-10' :   index == 1 ? ' transform rotate-125 mb-[-3px] ' : index == 2 ? ' rotate-225' :  index == 3 ? ' rotate-180' : ''}`}  />
-          <p className={` text-[0.75rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold  ${ index == 0 ||index == 5    ? '-mt-1 -m-1' :  'mt-[0.3rem]' }`}>
-          {picker.title}
+      ), {
+        duration: 5000,
+        position: 'top-center',
+      })
+    }
+    return (
+      <Template>
+          <Toaster richColors />
+          <div className='min-h-screen max-w-4xl mx-auto flex flex-col items-center px-4 sm:px-6 lg:px-8'>
+              {/* Header Section */}
+              <div className='w-full relative'>
+                  <WelcomeComponent data={data}/>
+                  <img 
+                      src={RRLOGO2} 
+                      alt="logo" 
+                      className="absolute top-4 right-3 h-14 w-14"
+                  />
+              </div>
   
-          </p>
+              {/* Content Section */}
+              <div className='w-full text-center mt-[5rem] space-y-4'>
+                  <p className='font-bold text-xl text-white'>
+                      <span className='text-red-600'>WIN</span> or LOSE
+                  </p>
+                  <p className='text-xs text-white'>
+                      Select a number pool and stand a chance to 
+                      <span className='text-red-600'> WIN BIG !!!</span>
+                  </p>
+                  <p className='text-white'>
+                      0x***cb0u0d.. Just won 
+                      <span className='text-red-600 font-bold'> {latestWin || 10} TON</span>
+                  </p>
+                  <div className='text-sm font-semibold text-white'>
+                      <p>Click spin after selecting a number pool</p>
+                  </div>
+              </div>
+  
+              {/* Wheel Section */}
+              <div className='w-full flex justify-center items-center mt-8 mb-8'>
+                  <div className='relative w-full max-w-[300px] aspect-square'>
+                      {/* Marker */}
+                      <div className='absolute top-0 left-1/2 -translate-x-1/2 z-10 w-8 h-8'>
+                          <img src={whiteMarker} alt="" className="marker"/>
+                      </div>
+                      
+                      {/* Wheel */}
+                      <div className='w-full h-full'>
+                          <Wheel
+                              mustStartSpinning={mustSpin}
+                              prizeNumber={prizeNumber}
+                              data={data}
+                              onStopSpinning={handleStopSpinning}
+                              backgroundColors={['#FF4136']}
+                              textColors={['#FFFFFF']}
+                              outerBorderColor="#FF4136"
+                              outerBorderWidth={5}
+                              innerRadius={40}
+                              innerBorderColor="#1D1B4D"
+                              innerBorderWidth={5}
+                              radiusLineColor="#1D1B4D"
+                              radiusLineWidth={2}
+                              fontSize={14}
+                              textDistance={60}
+                          />
+                      </div>
+  
+                      {/* Spin Button */}
+                      <button 
+                          onClick={handleSpinClick}
+                          disabled={mustSpin}
+                          className={`
+                              absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+                              bg-[#1D1B4D] text-white rounded-full
+                              w-20 h-20 font-bold z-10
+                              transition-all duration-200
+                              hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-red-600
+                              ${mustSpin ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}
+                          `}
+                      >
+                          {mustSpin ? 'SPINNING...' : 'SPIN'}
+                      </button>
+                  </div>
+              </div>
           </div>
-          </div>
-        );
-      })}
-        </div>
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 text-blue-950 font-bold   flex items-center justify-center bg-white rounded-full border-2 border-blue-700'>
-        <button onClick={handleSpinning}>
-        <p >SPIN</p>
-        </button>
-        </div>
-        </motion.div>
-      </div>
-        </div>
-       </div>
-        {/* </div> */}
-    </Template>
+      </Template>
   )
-}
+  }
 
 export default PlayScreen
