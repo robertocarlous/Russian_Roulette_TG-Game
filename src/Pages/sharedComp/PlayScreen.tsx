@@ -128,7 +128,7 @@ function PlayScreen() {
                               prizeNumber={prizeNumber}
                               data={data}
                               onStopSpinning={handleStopSpinning}
-                              backgroundColors={['#FF4136']}
+                              backgroundColors={['#FF4136','#89100a','#ce1e14',]}
                               textColors={['#FFFFFF']}
                               outerBorderColor="#FF4136"
                               outerBorderWidth={5}
@@ -137,8 +137,8 @@ function PlayScreen() {
                               innerBorderWidth={5}
                               radiusLineColor="#1D1B4D"
                               radiusLineWidth={2}
-                              fontSize={14}
-                              textDistance={60}
+                              fontSize={16}
+                              textDistance={65}
                           />
                       </div>
   
