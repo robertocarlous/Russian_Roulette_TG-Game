@@ -8,6 +8,7 @@ import { Toaster, toast } from 'sonner'
 import {soundManager} from "../../lib/soundManager.ts"
 
 import { initializeWebApp } from '@/Authenticator.ts'
+import NumberRangeGrid from './NumberRange.tsx'
 // You can download these sounds and save them in your assets folder
 
 function PlayScreen() {
@@ -112,7 +113,9 @@ function PlayScreen() {
                       <p>Click spin after selecting a number pool</p>
                   </div>
               </div>
-  
+              <div className="w-full mt-6">
+                <NumberRangeGrid />
+              </div>
               {/* Wheel Section */}
               <div className='w-full flex justify-center items-center mt-8 mb-8'>
                   <div className='relative w-full max-w-[300px] aspect-square'>

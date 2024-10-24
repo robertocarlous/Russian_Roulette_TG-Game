@@ -2,8 +2,9 @@ import Template from './sharedComp/RoulletteTemplate'
 import { Button } from '@/components/ui/button'
 import RRLOGO2 from "../assets/RR2.png"
 import { TonConnectButton, useTonAddress } from '@tonconnect/ui-react'
+import { Wallet2 } from 'lucide-react';
 function Wallet() {
-  const userFriendlyAddress = useTonAddress();
+  // const userFriendlyAddress = useTonAddress();
     const rawAddress = useTonAddress(false);
   return (
     <Template>
@@ -16,12 +17,10 @@ function Wallet() {
 
             {
               rawAddress ? (
-                <div className='mt-6 text-center flex-wrap text-white text-sm'>
-                  <p>Your TON address is:
+                <Button className='mt-6 text-center  text-white text-sm flex gap-5 rounded-[2rem] w-fit px-[2rem]  mx-auto py-2'>
+                  <Wallet2/>
                   {rawAddress.slice(0, 14) + '...'}
-                  </p>
-                  <p>Your user address is: {userFriendlyAddress.slice(0, 14) + '...'}  </p>
-                </div>
+                  </Button>
               )
               : ( <TonConnectButton className='rounded-[2rem] w-fit px-[2rem]  mx-auto'/>  )
 
