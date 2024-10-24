@@ -8,16 +8,23 @@ import WelcomeComponent from './Welcome'
 import { Toaster, toast } from 'sonner'
 import {soundManager} from "../../lib/soundManager.ts"
 
+import { initializeWebApp } from '@/Authenticator.ts'
 // You can download these sounds and save them in your assets folder
 
 function PlayScreen() {
     const [mustSpin, setMustSpin] = useState(false)
     const [prizeNumber, setPrizeNumber] = useState(0)
+    const [userdata,setUserdata] = useState("")
     const latestWin = 122 
     
     const spinSound = new Audio("https://assets.mixkit.co/active_storage/sfx/146/146-preview.mp3")
     const winSound = new Audio("https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3")
-
+    useEffect(() => {
+      // Initialize the WebApp and set the user data
+      const user = initializeWebApp();
+        setUserdata(user?.username || "")
+    }, [userdata]);
+  
     // Preload sounds
     useEffect(() => {
         spinSound.load()
@@ -81,7 +88,7 @@ function PlayScreen() {
           <div className='min-h-screen max-w-4xl mx-auto flex flex-col items-center px-4 sm:px-6 lg:px-8'>
               {/* Header Section */}
               <div className='w-full relative'>
-                  <WelcomeComponent data={data}/>
+                  <WelcomeComponent data={userdata}/>
                   <img 
                       src={RRLOGO2} 
                       alt="logo" 
