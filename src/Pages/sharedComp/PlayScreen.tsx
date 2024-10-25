@@ -9,13 +9,21 @@ import {soundManager} from "../../lib/soundManager.ts"
 
 import { initializeWebApp } from '@/Authenticator.ts'
 import NumberRangeGrid from './NumberRange.tsx'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog"
 // You can download these sounds and save them in your assets folder
 
 function PlayScreen() {
     const [mustSpin, setMustSpin] = useState(false)
     const [prizeNumber, setPrizeNumber] = useState(0)
+    const [showAuthDialog, setShowAuthDialog] = useState(false)
     const [userdata,setUserdata] = useState("")
-    const latestWin = 122 
+    const latestWin = 7
     
     const spinSound = new Audio("https://assets.mixkit.co/active_storage/sfx/146/146-preview.mp3")
     const winSound = new Audio("https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3")
@@ -31,13 +39,43 @@ function PlayScreen() {
         winSound.load()
     }, [])
 
-    const data = [
-      { option: 'Player one' },
-      { option: 'Player two' },
-      { option: 'Player three' },
+    const playerNames = [
+      "KyroLexo",
+      "märtinho",
+      "TFT Zenox",
+      "Ryzeyyy",
+      "Azähir",
+      "VoltrixPro",
+      "Syndraaa",
+      "LuxAndMorg",
+      "Därkness",
+      "Nüjablade",
+      "Kaynzyyy",
+      "AstraalTFT",
+      "Jinxxed",
+      "Zëphyr",
+      "krönen",
+      "TFT Mystic",
+      "Vorpalxx",
+      "Rüneterran"
     ]
+  // Get two random names from the array
+  const getRandomPlayers = () => {
+      const shuffled = [...playerNames].sort(() => 0.5 - Math.random())
+      return shuffled.slice(0, 2)
+  }
+  const [randomPlayers] = useState(getRandomPlayers())
+  const data = [
+    { option: randomPlayers[0].slice(0, 9) },
+    { option: randomPlayers[1].slice(0, 9)},
+    { option: userdata ? `${userdata} (You)` : 'Player three' },
+  ]
 
     const handleSpinClick = () => {
+      if (!userdata) {
+        setShowAuthDialog(true)
+        return
+      }
       if (!mustSpin) {
         const newPrizeNumber = Math.floor(Math.random() * data.length)
         setPrizeNumber(newPrizeNumber)
@@ -87,6 +125,34 @@ function PlayScreen() {
           <Toaster richColors />
           <div className='min-h-screen max-w-4xl mx-auto flex flex-col items-center px-4 sm:px-6 lg:px-8'>
               {/* Header Section */}
+              <Dialog open={showAuthDialog} onOpenChange={setShowAuthDialog}>
+                <DialogContent className="sm:max-w-[425px] bg-[#1D1B4D] text-white">
+                  <DialogHeader>
+                    <DialogTitle>Authentication Required</DialogTitle>
+                    <DialogDescription className="text-gray-300">
+                      Please sign in to play the game and win amazing prizes!
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex flex-col space-y-4 mt-4">
+                    <p className="text-sm text-gray-300">
+                      Sign in to:
+                      <ul className="list-disc list-inside mt-2 space-y-1">
+                        <li>Spin the wheel</li>
+                        <li>Win TON tokens</li>
+                        <li>Track your winnings</li>
+                        <li>Compete with other players</li>
+                      </ul>
+                    </p>
+                    <button
+                      onClick={() => setShowAuthDialog(false)}
+                      className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                    >
+                      Got it
+                    </button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+
               <div className='w-full relative'>
                   <WelcomeComponent data={userdata}/>
                   <img 
@@ -158,7 +224,9 @@ function PlayScreen() {
                               ${mustSpin ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}
                           `}
                       >
-                          {mustSpin ? 'SPINNING...' : 'SPIN'}
+                        <p className='text-sm'>
+                        {mustSpin ? 'SPINNING...' : 'SPIN'}
+                        </p>
                       </button>
                   </div>
               </div>
