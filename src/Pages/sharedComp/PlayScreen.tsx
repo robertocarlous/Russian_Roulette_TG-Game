@@ -155,7 +155,7 @@ function PlayScreen() {
               
 
               <div className='w-full relative'>
-              <WelcomeComponent data={userData?.firstName}/>
+              <WelcomeComponent data={userdata?.firstName}/>
                   <img 
                       src={RRLOGO2} 
                       alt="logo" 
