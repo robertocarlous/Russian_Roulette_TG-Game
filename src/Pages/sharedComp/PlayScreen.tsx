@@ -114,7 +114,7 @@ function PlayScreen() {
                   {winner} has won the spin!
                 </p>
                 <p className="mt-1 text-sm text-gray-300">
-                  Cost: 5 TON | New Balance: {balance} TON
+                  Cost: 5 Test coins | New Balance: {balance} Test Coin
                 </p>
               </div>
             </div>
@@ -150,7 +150,7 @@ function PlayScreen() {
                   Sign in to:
                   <ul className="list-disc list-inside mt-2 space-y-1">
                     <li>Spin the wheel</li>
-                    <li>Win TON tokens</li>
+                    <li>Win Test coins</li>
                     <li>Track your winnings</li>
                     <li>Compete with other players</li>
                   </ul>
@@ -170,7 +170,7 @@ function PlayScreen() {
               <DialogHeader>
                 <DialogTitle>Insufficient Balance</DialogTitle>
                 <DialogDescription className="text-gray-300">
-                  You need at least 2 TON to play. Your current balance is {balance} TON.
+                  You need at least 2 Test coins to play. Your current balance is {balance} Test coins.
                 </DialogDescription>
               </DialogHeader>
               <div className="flex flex-col space-y-4 mt-4">
@@ -206,11 +206,11 @@ function PlayScreen() {
                       <span className='text-red-600'> WIN BIG !!!</span>
                   </p>
                   <p className='text-white'>
-                      Balance: <span className='text-red-600 font-bold'>{balance} TON</span>
+                      Balance: <span className='text-red-600 font-bold'>{balance} Test coins</span>
                   </p>
                   <p className='text-white'>
                       0x***cb0u0d.. Just won 
-                      <span className='text-red-600 font-bold'> {latestWin} TON</span>
+                      <span className='text-red-600 font-bold'> {latestWin} Test coins</span>
                   </p>
                   <div className='text-sm font-semibold text-white'>
                       <p>Click spin after selecting a number pool</p>
