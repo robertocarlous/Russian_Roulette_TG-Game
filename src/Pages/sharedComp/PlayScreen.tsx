@@ -68,7 +68,7 @@ function PlayScreen() {
   const data = [
     { option: randomPlayers[0].slice(0, 9) },
     { option: randomPlayers[1].slice(0, 9)},
-    { option: userdata ? `${userdata} (You)` : 'Player three' },
+    { option: userdata ? `${userdata?.firstName} (You)` : 'Player three' },
   ]
 
     const handleSpinClick = () => {
