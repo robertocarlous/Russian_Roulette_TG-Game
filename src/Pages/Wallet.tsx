@@ -7,14 +7,14 @@ import FaucetClaim from './sharedComp/FaucetClaims';
 function Wallet() {
   const rawAddress = useTonAddress(false);
 
-  const handleFaucetClaim = () => {
-    if (!rawAddress) {
-      console.error('No wallet connected');
-      return;
-    }
-    console.log('Claiming tokens for address:', rawAddress);
-    // Add your faucet claim implementation here
-  };
+  // const handleFaucetClaim = () => {
+  //   if (!rawAddress) {
+  //     console.error('No wallet connected');
+  //     return;
+  //   }
+  //   console.log('Claiming tokens for address:', rawAddress);
+  //   // Add your faucet claim implementation here
+  // };
 
   return (
     <Template>
@@ -27,12 +27,7 @@ function Wallet() {
         {rawAddress ? (
           <>
              <TonConnectButton className='mt-6 text-center text-white text-sm flex gap-5 rounded-[2rem] w-fit px-[2rem] mx-auto py-2'/>
-            <Button 
-              onClick={handleFaucetClaim}
-              className='mt-4 text-center text-white text-sm rounded-[2rem] w-fit px-[2rem] mx-auto'
-            >
-              Claim Tokens
-            </Button>
+            
           </>
         ) : (
           <TonConnectButton className='rounded-[2rem] w-fit px-[2rem] mx-auto'/>
