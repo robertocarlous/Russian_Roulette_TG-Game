@@ -123,9 +123,7 @@ function PlayScreen() {
     return (
       <Template>
           <Toaster richColors />
-          <div className='min-h-screen max-w-4xl mx-auto flex flex-col items-center px-4 sm:px-6 lg:px-8'>
-              {/* Header Section */}
-              <Dialog open={showAuthDialog} onOpenChange={setShowAuthDialog}>
+          <Dialog open={showAuthDialog} onOpenChange={setShowAuthDialog}>
                 <DialogContent className="sm:max-w-[425px] bg-[#1D1B4D] text-white">
                   <DialogHeader>
                     <DialogTitle>Authentication Required</DialogTitle>
@@ -152,9 +150,12 @@ function PlayScreen() {
                   </div>
                 </DialogContent>
               </Dialog>
+          <div className='min-h-screen max-w-4xl mx-auto flex flex-col items-center px-4 sm:px-6 lg:px-8'>
+              {/* Header Section */}
+              
 
               <div className='w-full relative'>
-                  <WelcomeComponent data={userdata}/>
+              <WelcomeComponent data={userData?.firstName}/>
                   <img 
                       src={RRLOGO2} 
                       alt="logo" 
