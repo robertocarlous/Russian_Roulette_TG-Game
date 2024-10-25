@@ -50,7 +50,7 @@ const leaderboardData = [
   { rank: 7, name: "Salvyyy", tokenWon: 1.0, played: 32, wins: 10, avatar: gameAvatars[1] },
   { rank: 8, name: "Voltariusx", tokenWon: 1.0, played: 28, wins: 9, avatar: gameAvatars[2] },
   { rank: 9, name: "kingmust143", tokenWon: 1.0, played: 29, wins: 7, avatar: gameAvatars[3] },
-  { rank: "+1M", name: "brüninho", tokenWon: 1.0, played: 35, wins: 127, avatar: gameAvatars[4] },
+  { rank: "+1M", name: "brüninho", tokenWon: 1.0, played: 35, wins: 7, avatar: gameAvatars[4] },
 ];
 
 const Leaderboard = () => {
