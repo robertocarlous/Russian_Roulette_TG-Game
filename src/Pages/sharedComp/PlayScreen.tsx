@@ -7,7 +7,7 @@ import WelcomeComponent from './Welcome'
 import { Toaster, toast } from 'sonner'
 import {soundManager} from "../../lib/soundManager.ts"
 
-import { initializeWebApp } from '@/Authenticator.ts'
+import { initializeWebApp, UserData } from '@/Authenticator.ts'
 import NumberRangeGrid from './NumberRange.tsx'
 import {
   Dialog,
@@ -22,7 +22,7 @@ function PlayScreen() {
     const [mustSpin, setMustSpin] = useState(false)
     const [prizeNumber, setPrizeNumber] = useState(0)
     const [showAuthDialog, setShowAuthDialog] = useState(false)
-    const [userdata,setUserdata] = useState("")
+    const [userdata,setUserdata] = useState<UserData | null>(null)
     const latestWin = 7
     
     const spinSound = new Audio("https://assets.mixkit.co/active_storage/sfx/146/146-preview.mp3")
@@ -30,8 +30,8 @@ function PlayScreen() {
     useEffect(() => {
       // Initialize the WebApp and set the user data
       const user = initializeWebApp();
-        setUserdata(user?.username || "")
-    }, [userdata]);
+      setUserdata(user);
+    }, []);
   
     // Preload sounds
     useEffect(() => {
